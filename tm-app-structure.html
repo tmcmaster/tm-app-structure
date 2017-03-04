@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`tm-app-structure`
+Base structure for an app, to assist in rapidly building polymer apps.
+
+@demo demo/index.html 
+-->
+
+<dom-module id="tm-app-structure">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'tm-app-structure',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'tm-app-structure',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
