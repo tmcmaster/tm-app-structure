@@ -3,7 +3,9 @@
   "description": "Base structure for an app, to assist in rapidly building polymer apps.",
   "main": "tm-app-structure.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.4.0"
+    "polymer": "Polymer/polymer#^1.4.0",
+    "paper-elements": "^1.0.7",
+    "iron-elements": "^1.0.10"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

@@ -1,34 +1,138 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-elements/paper-elements.html">
+<link rel="import" href="../iron-elements/iron-elements.html">
 
 <!--
 `tm-app-structure`
 Base structure for an app, to assist in rapidly building polymer apps.
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="tm-app-structure">
   <template>
     <style>
       :host {
-        display: block;
+        display:inline-block;
+        box-sizing:border-box;
+      }
+      /*paper-drawer-panel {*/
+      /*paper-scroll-header-panel {*/
+      /*iron-pages {
+        box-sizing: border-box;
+        border: solid blue 3px;
+      }*/
+      paper-scroll-header-panel {
+        //border: solid red 3px;
+        box-sizing: border-box;
+        height:100%;
+      }
+      iron-pages {
+        //border: solid blue 3px;
+        box-sizing: border-box;
+        height:calc(100% - 4px);
+      }
+      iron-pages ::content > * {
+        //border:solid blue 3px;
+        height:100%;
       }
     </style>
-    <h2>Hello [[prop1]]</h2>
+
+    <!-- <h2>[[titles]] : [[pageTitle]]</h2>
+    <ul>
+      <template is="dom-repeat" items="[[pageTitles]]">
+        <li>[[item]]</li>
+      </template>
+    </ul>
+ -->
+
+    <paper-drawer-panel id="drawer" force-narrow>
+      <paper-header-panel drawer>
+        <paper-toolbar>
+          <div class="title">Menu</div>
+        </paper-toolbar>
+        <paper-menu id="menu" selected="{{selected}}">
+          <template is="dom-repeat" items="{{pageTitles}}">
+              <paper-item>{{item}}</paper-item>
+          </template>
+        </paper-menu>
+      </paper-header-panel>
+
+      <paper-scroll-header-panel main>
+        <paper-toolbar>
+          <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+          <div class="flex title">[[appTitle]] - [[pageTitle]]</div>
+          <paper-icon-button icon="search"></paper-icon-button>
+          <paper-icon-button icon="more-vert"></paper-icon-button>
+        </paper-toolbar>
+
+        <iron-pages class="content" selected="{{selected}}">
+          <content/>
+        </iron-pages>
+      </paper-scroll-header-panel>
+
+    </paper-drawer-panel>
+
   </template>
 
   <script>
-    Polymer({
-
-      is: 'tm-app-structure',
-
-      properties: {
-        prop1: {
-          type: String,
-          value: 'tm-app-structure',
+    (function(Polymer) {
+      Polymer({
+        is: 'tm-app-structure',
+        properties: {
+          appTitle: {
+            type: String,
+            notify: true
+          },
+          titles: {
+            type: String,
+            notify: true
+          },
+          pageTitles: {
+            type: Array,
+            value: ['Sign In','Select','Edit','Run'],
+            notify: true,
+            computed: '_createPageTitles(titles)'
+          },
+          selected: {
+            type: Number,
+            value: 0,
+            notify: true
+          },
+          pageTitle: {
+            type: String,
+            notify:true,
+            computed: '_getPageTitle(selected,pageTitles)'
+          }
         },
-      },
-
-    });
+        behaviors: [],
+        observers: [
+          'debug(pageTitles)'
+        ],
+        listeners: {
+          'menu.iron-select': '_menuSelected'
+        },
+        _getPageTitle: function(selected, pageTitles) {
+          return (pageTitles === undefined ? "" : pageTitles[selected]);
+        },
+        _createPageTitles: function(titles) {
+          var newTitles = titles.split(',');
+          return newTitles;
+        },
+        _updatePageTitles: function(titles) {
+          this.pageTitles = ['A','B','C','D'];
+          this.notifyPath("pageTitles", this.pageTitles.slice());
+        },
+        _menuSelected: function() {
+          this.$.drawer.closeDrawer();
+        },
+        debug: function(o) {
+          console.log('Page Titles', o);
+        },
+        ready: function() {
+          console.log('tm-app-structure has been created.');
+        }
+      });
+    })(window.Polymer);
   </script>
 </dom-module>

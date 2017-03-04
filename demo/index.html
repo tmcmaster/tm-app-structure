@@ -20,7 +20,14 @@
       <h3>Basic tm-app-structure demo</h3>
       <demo-snippet>
         <template>
-          <tm-app-structure></tm-app-structure>
+          <tm-app-structure app-title="Demo Application" titles="Page One,Page Two" selected="0">
+            <fieldset>
+              <legend>Page One</legend>
+            </fieldset>
+            <fieldset>
+              <legend>Page Two</legend>
+            </fieldset>
+          </tm-app-structure>
         </template>
       </demo-snippet>
     </div>
