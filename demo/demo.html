@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>tm-app-structure demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../tm-app-structure.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+    <script>
+      function testing() {
+        alert('sdfsdafasfdasf');
+      }
+    </script>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic tm-app-structure Demo</h3>
+
+      <tm-app-structure app-title="Demo Application" titles="Page One,Page Two" selected="0">
+
+        <paper-icon-button icon="search"></paper-icon-button>
+
+        <paper-item onclick="testing()">Share</paper-item>
+        <paper-item>Settings</paper-item>
+        <paper-item>Help</paper-item>
+
+        <fieldset>
+          <legend>Page One</legend>
+          <fieldset>
+            <legend>AAAAAA</legend>
+          </fieldset>
+        </fieldset>
+        <fieldset>
+          <legend>Page Two</legend>
+        </fieldset>
+
+      </tm-app-structure>
+    </div>
+  </body>
+</html>

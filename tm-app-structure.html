@@ -62,12 +62,19 @@ Base structure for an app, to assist in rapidly building polymer apps.
         <paper-toolbar>
           <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
           <div class="flex title">[[appTitle]] - [[pageTitle]]</div>
-          <paper-icon-button icon="search"></paper-icon-button>
-          <paper-icon-button icon="more-vert"></paper-icon-button>
+          <div>
+            <content select="paper-icon-button"/>
+          </div>
+          <paper-menu-button>
+            <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+            <paper-menu class="dropdown-content">
+              <content select="paper-item"/>
+            </paper-menu>
+          </paper-menu-button>
         </paper-toolbar>
 
         <iron-pages class="content" selected="{{selected}}">
-          <content/>
+          <content select=":not(paper-item):not(paper-icon-button)"/>
         </iron-pages>
       </paper-scroll-header-panel>
 
